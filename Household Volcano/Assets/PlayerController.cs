@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
 
     public int sensitivity = 1;
+    public int jumpForce = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space was pressed!");
+            GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 

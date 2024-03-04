@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 14591
+  controlID: 105
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 14592
+  controlID: 41
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 14593
+  controlID: 42
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   - {fileID: 13}
   - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -270,8 +270,8 @@ MonoBehaviour:
     y: 0
     width: 454
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -315,14 +315,14 @@ MonoBehaviour:
     m_KeySerializationHelper:
     - {fileID: 2176392718801952664, guid: b42940aef2afb8346bfc984741462a8a, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.49878025
+    - e00: 0.8253624
       e01: 0
       e02: 0
-      e03: 253.51938
+      e03: 0.8751221
       e10: 0
-      e11: 0.49878025
+      e11: 0.8253624
       e12: 0
-      e13: 106.37286
+      e13: 152.26393
       e20: 0
       e21: 0
       e22: 1
@@ -482,9 +482,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 8622feff
-      m_LastClickedID: -122234
-      m_ExpandedIDs: 8248fffffcd8ffff58faffffb66a0000
+      m_SelectedIDs: 78140000
+      m_LastClickedID: 0
+      m_ExpandedIDs: caeeffff4c520000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -962,7 +962,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Models/LivingRoom
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -970,16 +970,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Models/LivingRoom
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\kjjus\github\Household-Volcano\Household Volcano
+  m_LastProjectPath: D:\Documents\GitHub\Household-Volcano\Household Volcano
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b27e0000
-    m_LastClickedID: 32434
-    m_ExpandedIDs: 00000000a8590000fa5d0000f46e0000f86e00000c6f00005a7e00005e7e0000667e00006a7e000000ca9a3b
+    m_SelectedIDs: 96520000
+    m_LastClickedID: 21142
+    m_ExpandedIDs: 00000000da11000096520000985200009a5200009c5200009e520000a0520000a2520000a452000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1007,7 +1007,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a859000000ca9a3b
+    m_ExpandedIDs: 00000000da11000096520000985200009a5200009c5200009e520000a0520000a2520000a4520000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1138,7 +1138,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 153
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
