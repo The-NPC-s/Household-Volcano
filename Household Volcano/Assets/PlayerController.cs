@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     public int sensitivity = 1;
     public int jumpForce = 10;
+    public bool onGround = true;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,9 +46,10 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().AddRelativeForce(0, 0, 10);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            onGround = false;
         }
     }
 
@@ -54,8 +58,12 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * sensitivity * Time.deltaTime * Input.GetAxis("Mouse X"));
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         Debug.Log("trigger enter " + other.transform.name);
-    }
+        if (!onGround && other.transform.tag == "Ground")
+        {
+            onGround = true;
+        }
+    }   
 }
