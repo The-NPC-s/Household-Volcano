@@ -1,3 +1,4 @@
+using System.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,10 @@ public class PlayerController : MonoBehaviour
 
     public int sensitivity = 1;
     public int jumpForce = 10;
+    public int speed = 5;
     // Start is called before the first frame update
+    public bool onGround = true;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -21,31 +25,39 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotate();
+        Drag();
     }
 
     private void Move()
     {
+        if (!onGround){
+            speed = 1;
+        }
+        else{
+            speed = 5;
+        }
         if (Input.GetAxis("Vertical") > 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce(10, 0, 0);
+            GetComponent<Rigidbody>().AddRelativeForce(speed, 0, 0);
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce(-10, 0, 0);
+            GetComponent<Rigidbody>().AddRelativeForce(-speed, 0, 0);
         }
 
         if (Input.GetAxis("Horizontal") > 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce(0, 0, -10);
+            GetComponent<Rigidbody>().AddRelativeForce(0, 0, 3*-speed/2);
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce(0, 0, 10);
+            GetComponent<Rigidbody>().AddRelativeForce(0, 0, 3*speed/2);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (onGround && Input.GetKeyDown(KeyCode.Space))
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            onGround = false;
         }
     }
 
@@ -54,8 +66,24 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * sensitivity * Time.deltaTime * Input.GetAxis("Mouse X"));
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Drag()
     {
-        Debug.Log("trigger enter " + other.transform.name);
+        if (onGround)
+            GetComponent<Rigidbody>().drag = 6f;
+        else
+            GetComponent<Rigidbody>().drag = 1.4f;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!onGround && other.collider.tag == "Ground"){
+            onGround = true;
+        }
+
+        if (other.collider.tag == "lava")
+        {
+            // Turn the player all black
+            GetComponent<Renderer>().material.color = Color.black;
+        }
     }
 }
