@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.collider.tag == "lava")
         {
+            GameObject.Find("puppet_kid").GetComponent<Renderer>().material.color = Color.black;
             // Turn the player all black
             GetComponent<Renderer>().material.color = Color.black;
         }
