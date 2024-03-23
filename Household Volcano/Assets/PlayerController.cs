@@ -11,11 +11,12 @@ public class PlayerController : MonoBehaviour
     public int sensitivity = 1;
     public int jumpForce = 10;
     public int speed = 5;
-    // Start is called before the first frame update
     public bool onGround = true;
+    private Animator animator;
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
@@ -26,6 +27,15 @@ public class PlayerController : MonoBehaviour
         Move();
         Rotate();
         Drag();
+
+        if(GetComponent<Rigidbody>().velocity.magnitude > 0)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
     }
 
     private void Move()
