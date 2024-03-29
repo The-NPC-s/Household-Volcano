@@ -27,15 +27,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Rotate();
         Drag();
-
-        if(GetComponent<Rigidbody>().velocity.magnitude > 0)
-        {
-            animator.SetBool("isMoving", true);
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
-        }
+        aniamte();
     }
 
     private void Move()
@@ -95,6 +87,18 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("puppet_kid").GetComponent<Renderer>().material.color = Color.black;
             // Turn the player all black
             GetComponent<Renderer>().material.color = Color.black;
+        }
+    }
+
+    private void aniamte()
+    {
+        if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
     }
 }
