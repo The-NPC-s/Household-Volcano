@@ -2393,6 +2393,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b42940aef2afb8346bfc984741462a8a, type: 2}
+    - target: {fileID: 5866666021909216657, guid: b10fec9bba2b7eb4285c00cedd56af11, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7402483750096178387, guid: b10fec9bba2b7eb4285c00cedd56af11, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2576,6 +2580,7 @@ MonoBehaviour:
   jumpForce: 10
   speed: 5
   onGround: 1
+  dead: 0
 --- !u!54 &1531598229
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2601,7 +2606,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!65 &1531598230
 BoxCollider:
@@ -3591,8 +3596,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e268c58a4e4aba0458e7e73888746b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabled: 0
-  speed: 0.01
+  lava_enabled: 1
+  speed: 0.0004
 --- !u!65 &2116822556
 BoxCollider:
   m_ObjectHideFlags: 0

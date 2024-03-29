@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
-    public bool enabled = true;
+    public bool lava_enabled = true;
     public float speed = 0.01f;
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class LavaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enabled)
+        if (lava_enabled)
         {
             Rise();
         }
@@ -23,6 +23,6 @@ public class LavaController : MonoBehaviour
 
     private void Rise()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + speed, transform.position.z);
     }
 }

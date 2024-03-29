@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int jumpForce = 10;
     public int speed = 5;
     public bool onGround = true;
+    public bool dead = false;
     private Animator animator;
 
     void Start()
@@ -24,10 +25,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Rotate();
-        Drag();
-        aniamte();
+        if (!dead)
+        {
+            Move();
+            Rotate();
+            Drag();
+            aniamte();
+        }
+        
     }
 
     private void Move()
@@ -79,16 +84,38 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!onGround && other.collider.tag == "Ground"){
+        if (!onGround && other.collider.tag == "Ground")
+        {
             onGround = true;
             animator.SetBool("isJumping", false);
         }
+    }
 
-        if (other.collider.tag == "lava")
+    //Tried to fix bug where you can walk off surface and then jump
+    private void OnCollisionExit(Collision other)
+    {
+        /*
+        if (onGround && other.collider.tag == "Ground")
         {
-            GameObject.Find("puppet_kid").GetComponent<Renderer>().material.color = Color.black;
+            onGround = false;
+            animator.SetBool("isJumping", true);
+        }
+        */
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "lava")
+        {
+            GameObject puppet = GameObject.Find("puppet_kid");
             // Turn the player all black
-            GetComponent<Renderer>().material.color = Color.black;
+            foreach (Renderer ren in puppet.GetComponentsInChildren<Renderer>())
+            {
+                ren.material.color = Color.black;
+            }
+            dead = true;
+            puppet.GetComponent<Animator>().enabled = false;
+            GameObject.Find("lava").GetComponent<LavaController>().lava_enabled = false;
         }
     }
 
