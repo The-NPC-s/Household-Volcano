@@ -11,11 +11,12 @@ public class PlayerController : MonoBehaviour
     public int sensitivity = 1;
     public int jumpForce = 10;
     public int speed = 5;
-    // Start is called before the first frame update
     public bool onGround = true;
+    private Animator animator;
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
     }
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Rotate();
         Drag();
+        aniamte();
     }
 
     private void Move()
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
+            animator.SetBool("isJumping", true);
         }
     }
 
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!onGround && other.collider.tag == "Ground"){
             onGround = true;
+            animator.SetBool("isJumping", false);
         }
 
         if (other.collider.tag == "lava")
@@ -85,6 +89,18 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("puppet_kid").GetComponent<Renderer>().material.color = Color.black;
             // Turn the player all black
             GetComponent<Renderer>().material.color = Color.black;
+        }
+    }
+
+    private void aniamte()
+    {
+        if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
     }
 }
