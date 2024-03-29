@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
+            animator.SetBool("isJumping", true);
         }
     }
 
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!onGround && other.collider.tag == "Ground"){
             onGround = true;
+            animator.SetBool("isJumping", false);
         }
 
         if (other.collider.tag == "lava")
