@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
 
     public int sensitivity = 1;
     public int jumpForce = 10;
-    public int speed = 5;
+    public int base_speed=3;
+    private int speed;
     public bool onGround = true;
     public bool dead = false;
     private Animator animator;
+    private float distToGround = 1.33f;
+
 
     void Start()
     {
@@ -35,13 +38,19 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void Move()
+    bool IsGrounded()
     {
-        if (!onGround){
-            speed = 1;
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
+    }
+
+private void Move()
+    {
+        if (!IsGrounded())
+        {
+            speed = base_speed/5;
         }
         else{
-            speed = 5;
+            speed = base_speed;
         }
         if (Input.GetAxis("Vertical") > 0)
         {
@@ -54,18 +63,16 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetAxis("Horizontal") > 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce(0, 0, 3*-speed/2);
+            GetComponent<Rigidbody>().AddRelativeForce(0, 0, -speed/1.5f);
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            GetComponent<Rigidbody>().AddRelativeForce(0, 0, 3*speed/2);
+            GetComponent<Rigidbody>().AddRelativeForce(0, 0, speed/1.5f);
         }
 
-        if (onGround && Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            onGround = false;
-            animator.SetBool("isJumping", true);
         }
     }
 
@@ -76,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void Drag()
     {
-        if (onGround)
+        if (IsGrounded())
             GetComponent<Rigidbody>().drag = 6f;
         else
             GetComponent<Rigidbody>().drag = 1.4f;
@@ -84,10 +91,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!onGround && other.collider.tag == "Ground")
+        if (!IsGrounded())
         {
-            onGround = true;
-            animator.SetBool("isJumping", false);
+            
         }
     }
 
@@ -121,7 +127,15 @@ public class PlayerController : MonoBehaviour
 
     private void aniamte()
     {
-        if(Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        if (IsGrounded())
+        {
+            animator.SetBool("isJumping", false);
+        }
+        else
+        {
+            animator.SetBool("isJumping", true);
+        }
+        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             animator.SetBool("isMoving", true);
         }
