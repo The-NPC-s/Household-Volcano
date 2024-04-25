@@ -3,25 +3,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
 
     public int sensitivity = 1;
-    public int jumpForce = 10;
-    public int base_speed=3;
+    public int jumpForce = 15;
+    public int base_speed=7;
     private int speed;
     public bool onGround = true;
     public bool dead = false;
     private Animator animator;
-    private float distToGround = 1.33f;
+    private float distToGround = 1.1f;
+    private LavaController lava;
 
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
+        lava = GameObject.Find("lava").GetComponent<LavaController>();
         //Cursor.visible = false;
     }
 
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
+        return Physics.CapsuleCast(transform.position, transform.position, 0.52f, -Vector3.up, distToGround);
     }
 
 private void Move()
@@ -111,17 +114,31 @@ private void Move()
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "lava")
+        switch (other.tag)
         {
-            GameObject puppet = GameObject.Find("puppet_kid");
-            // Turn the player all black
-            foreach (Renderer ren in puppet.GetComponentsInChildren<Renderer>())
-            {
-                ren.material.color = Color.black;
-            }
-            dead = true;
-            puppet.GetComponent<Animator>().enabled = false;
-            GameObject.Find("lava").GetComponent<LavaController>().lava_enabled = false;
+            case "lava":
+                GameObject puppet = GameObject.Find("puppet_kid");
+                // Turn the player all black
+                foreach (Renderer ren in puppet.GetComponentsInChildren<Renderer>())
+                {
+                    ren.material.color = Color.black;
+                }
+                dead = true;
+                puppet.GetComponent<Animator>().enabled = false;
+                lava.lava_enabled = false;
+                break;
+            case "stage1trigger":
+                lava.current_stage = 1;
+                break;
+            case "stage2trigger":
+                lava.current_stage = 2;
+                break;
+            case "stage3trigger":
+                lava.current_stage = 3;
+                break;
+            default:
+                break;
+
         }
     }
 

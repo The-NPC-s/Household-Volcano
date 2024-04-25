@@ -6,6 +6,7 @@ TagManager:
   tags:
   - lava
   - Ground
+  - stage1trigger
   layers:
   - Default
   - TransparentFX

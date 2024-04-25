@@ -6,6 +6,7 @@ public class LavaController : MonoBehaviour
 {
     public bool lava_enabled = true;
     public float speed = 0.01f;
+    public float current_stage = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,29 @@ public class LavaController : MonoBehaviour
     {
         if (lava_enabled)
         {
-            Rise();
+            switch (current_stage)
+            {
+                case 0:
+                    if (transform.position.y < 1.11f) 
+                    {
+                        Rise();
+                    }
+                    break;
+                case 1:
+                    if (transform.position.y < 4.64f)
+                    {
+                        Rise();
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+
+
+            }
         }
     }
 
