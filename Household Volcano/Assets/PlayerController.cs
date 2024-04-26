@@ -8,7 +8,6 @@ using UnityEditor.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
 
-
     public int sensitivity = 1;
     public int jumpForce = 15;
     public int base_speed=7;
@@ -25,7 +24,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         lava = GameObject.Find("lava").GetComponent<LavaController>();
-        //Cursor.visible = false;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
         return Physics.CapsuleCast(transform.position, transform.position, 0.52f, -Vector3.up, distToGround);
     }
 
-private void Move()
+    private void Move()
     {
         if (!IsGrounded())
         {
@@ -55,6 +54,7 @@ private void Move()
         else{
             speed = base_speed;
         }
+
         if (Input.GetAxis("Vertical") > 0)
         {
             GetComponent<Rigidbody>().AddRelativeForce(speed, 0, 0);
@@ -90,26 +90,6 @@ private void Move()
             GetComponent<Rigidbody>().drag = 6f;
         else
             GetComponent<Rigidbody>().drag = 1.4f;
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!IsGrounded())
-        {
-            
-        }
-    }
-
-    //Tried to fix bug where you can walk off surface and then jump
-    private void OnCollisionExit(Collision other)
-    {
-        /*
-        if (onGround && other.collider.tag == "Ground")
-        {
-            onGround = false;
-            animator.SetBool("isJumping", true);
-        }
-        */
     }
 
     private void OnTriggerEnter(Collider other)
