@@ -348,6 +348,8 @@
 "Assets/Movement.cs"
 "Assets/PlayerController.cs"
 "Assets/UIAssets/MainMenu.cs"
+"Assets/UIAssets/OptionsMenu.cs"
+"Assets/UIAssets/PauseMenu.cs"
 -langversion:9.0
 
 /deterministic

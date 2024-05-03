@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private float distToGround = 1.1f;
     private LavaController lava;
+    public GameObject gameOverUI;
 
 
     void Start()
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
             Move();
             Rotate();
             Drag();
-            aniamte();
+            animate();
         }
         
     }
@@ -126,6 +127,8 @@ private void Move()
                 dead = true;
                 puppet.GetComponent<Animator>().enabled = false;
                 lava.lava_enabled = false;
+                gameOverUI.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
                 break;
             case "stage1trigger":
                 lava.current_stage = 1;
@@ -142,7 +145,7 @@ private void Move()
         }
     }
 
-    private void aniamte()
+    private void animate()
     {
         if (IsGrounded())
         {
