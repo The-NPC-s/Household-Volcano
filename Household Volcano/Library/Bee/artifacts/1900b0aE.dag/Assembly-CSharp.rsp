@@ -347,6 +347,7 @@
 "Assets/LavaController.cs"
 "Assets/Movement.cs"
 "Assets/PlayerController.cs"
+"Assets/UIAssets/MainMenu.cs"
 -langversion:9.0
 
 /deterministic
